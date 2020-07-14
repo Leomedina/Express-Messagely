@@ -1,8 +1,6 @@
 const express = require('express');
 const User = require('../models/user');
-const Message = require('../models/message');
 const { ensureLoggedIn, ensureCorrectUser } = require('../middleware/auth');
-const { DB_URI } = require('../config');
 const router = express.Router();
 
 

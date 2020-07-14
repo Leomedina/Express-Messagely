@@ -57,4 +57,17 @@ router.post('/', ensureLoggedIn, async (req, res, next) => {
  *
  **/
 
+router.post('/:id', ensureLoggedIn, async (req, res, next) => {
+    try {
+        const message = await Message.get(req.params.id);
+        if (message.to_username.username === req.user.username) {
+            const read_at = await Message.markRead(req.params.id);
+            return res.json({ read_at });
+        }
+    } catch (e) {
+        return next(e);
+    };
+});
+
+
 module.exports = router;
